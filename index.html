@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+body {
+    background: #f0efec;
+    padding: 50px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+legend {
+    font-size: 25px;
+}
+
+fieldset {
+    font-size: 18px;
+}
+
+h2 {
+    color: #343a40;
+}
+
+.info {
+    width: 70%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+input[type="reset"],
+input[type="submit"] {
+    font-size: 18px;
+    color: white;
+    background-color: #6e38d5;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 5px 7px rgba(0,0,0,0.3);
+}
+
+.workoutRating, .addFeed {
+    line-height: 25px;
+}
+
+select {
+    color: white;
+    background-color: #6e38d5;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+</style>
+<head>
+  <title>Anytime Fitness Survey Form</title>
+</head>
+<body>
+  <center>
+    <img src="Anytime-Fitness-logo.png" alt="AF Logo" width="300" height="250">
+  </center>
+  
+  <h2 style="text-align:center;">Anytime Fitness Experience Survey</h2>
+  <form id="googleForm">
+    <fieldset>
+      <legend>Personal Information</legend>
+      Name: <br><input type="text" name="name" class="info" id="name" required><br><br>
+      Email: <br><input type="email" name="email" class="info" id="email"><br><br>
+      Age: <br><input type="number" name="age" min="10" max="100" class="info" id="age"><br><br>
+    </fieldset>
+    <br>
+
+    <div class="workoutRating"><fieldset>
+      <legend>Workout Rating</legend>
+      How satisfied are you with your gym experience?<br>
+      <input type="radio" name="rating" value="Very Satisfied" class="radio"> Very Satisfied<br>
+      <input type="radio" name="rating" value="Satisfied" class="radio"> Satisfied<br>
+      <input type="radio" name="rating" value="Neutral" class="radio"> Neutral<br>
+      <input type="radio" name="rating" value="Dissatisfied" class="radio"> Dissatisfied<br><br>
+
+      What Gym Equipment do you use? (Check all that apply):<br>
+      <input type="checkbox" name="equipment" value="Free Weights (Barbells, Dumbbells, Kettlebells)"> Free Weights (Barbells, Dumbbells, Kettlebells)<br>
+      <input type="checkbox" name="equipment" value="Smith Machine"> Smith Machine<br>
+      <input type="checkbox" name="equipment" value="Selectorized/Circuit Machines"> Selectorized/Circuit Machines<br>
+      <input type="checkbox" name="equipment" value="Plate-loaded Machines"> Plate-loaded Machines<br>
+      <input type="checkbox" name="equipment" value="Squat Racks"> Squat Racks<br><br>
+
+      What is your preferred Contact Method?
+      <select name="contact_method">
+        <option value="">--Please choose--</option>
+        <option value="Gmail">Gmail</option>
+        <option value="Mobile Number">Mobile Number</option>
+      </select><br><br>
+    </fieldset>
+    </div>
+    <br>
+
+    <div class="addFeed">
+    <fieldset>
+      <legend>Additional Feedback</legend>
+      Comments:<br>
+      <textarea name="comments" rows="5" cols="40" placeholder="Tell us how we can improve..."></textarea><br><br>
+    </fieldset>
+    </div>
+    <br>
+
+    <div style="text-align:center;">
+      <input type="reset" value="Reset Form">
+      <input type="submit" value="Submit Survey">
+    </div>
+  </form>
+
+  <script>
+
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbxaSTY_zYDruJKC8t1N14-W_kgB_HIUV0l4HkeyZXm0lR64WZO06iJHrtT9fXYXhPOo/exec';
+
+  const form = document.getElementById('googleForm');
+
+ 
+
+//When the user clicks the submit button, this function runs.
+
+  form.addEventListener('submit', e => {
+
+    e.preventDefault(); //This stops the browser’s default action of reloading
+
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+
+      .then(response => {
+
+        alert("Form submitted successfully!");
+
+        form.reset();
+
+      })
+
+      .catch(error => alert('Error!', error.message));
+
+  });
+
+</script>
+</body>
+</html>
